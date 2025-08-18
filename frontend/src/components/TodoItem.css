@@ -22,7 +22,6 @@
 
 .btn-wrap {
     display: flex;
-    gap: 10px;
 }
 
 .TodoItem button {

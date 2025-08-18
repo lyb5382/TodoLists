@@ -5,7 +5,7 @@ import TodoItem from './TodoItem'
 const TodoList = () => {
   return (
     <div className='TodoList'>
-      <h4>Todo List ✅</h4>
+      <h4>Todo List ☑️</h4>
       <input type="text" placeholder='검색어 입력' />
       <div className="todos-wrapper">
         <TodoItem />
