@@ -15,4 +15,4 @@ app.use('/api/todos', todoRoutes)
 
 app.get('/', (res, req) => { res.send('hello') })
 
-app.listen(PORT, () => { console.log(`server run: https://localhost:${PORT}`) })
+app.listen(PORT, () => { console.log(`server run: http://localhost:${PORT}`) })

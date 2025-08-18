@@ -1,0 +1,38 @@
+.TodoItem {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid lightgray;
+}
+
+.TodoItem.isCompleted {
+    background-color: rgb(245, 245, 245);
+    border-radius: 5px;
+}
+
+.TodoItem .content {
+    flex: 1;
+}
+
+.TodoItem .date {
+    font-size: 14px;
+    color: gray;
+}
+
+.btn-wrap {
+    display: flex;
+    gap: 10px;
+}
+
+.TodoItem button {
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    padding: 5px;
+    background-color: rgba(240, 248, 255, 0);
+}
+
+.TodoItem.isCompleted .content {
+    text-decoration: line-through;
+    color: darkgrey;
+}
