@@ -1,7 +1,7 @@
 .TodoItem {
     display: flex;
     gap: 20px;
-    padding-bottom: 20px;
+    padding: 10px 0;
     border-bottom: 1px solid lightgray;
     align-items: center;
 }
