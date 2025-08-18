@@ -4,8 +4,7 @@ import './Header.css'
 const Header = () => {
   return (
     <header>
-        <h1>오늘은 📆</h1>
-        <h1>{new Date().toDateString()}</h1>
+      <h1>🗓︎ {new Date().toLocaleString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' })}</h1>
     </header>
   )
 }
