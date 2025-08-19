@@ -1,15 +1,15 @@
 import React from 'react'
 import './TodoItem.css'
 
-const TodoItem = () => {
+const TodoItem = ({ todo, onDelete }) => {
   return (
-    <div className='TodoItem isCompleted'>
+    <div className='TodoItem'>
       <input type="checkbox" readOnly />
-      <div className="content">할일</div>
-      <div className="date">2025-08-18</div>
+      <div className="content">{todo.text}</div>
+      <div className="date">{new Date(`${todo.date}`).toISOString().slice(0, 10)}</div>
       <div className="btn-wrap">
         <button className="updateBtn">✏️</button>
-        <button className="deleteBtn">🗑️</button>
+        <button className="deleteBtn" onClick={()=>{onDelete(todo._id)}}>🗑️</button>
       </div>
     </div>
   )

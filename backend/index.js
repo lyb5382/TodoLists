@@ -6,6 +6,7 @@ dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 3000
 app.use(express.json())
+app.use(cors({ origin: process.env.FRONT_ORIGIN, credentials: true }))
 mongoose.connect(process.env.MONGO_URI).then(() => console.log("db 연결 완료!")).catch((err) => console.log(err))
 
 const todoRoutes = require('./routes/todoRoutes')
