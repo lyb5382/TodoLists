@@ -11,6 +11,19 @@
     border-radius: 5px;
 }
 
+.edit-wrap,
+.content-wrap {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+}
+
+.edit-wrap input {
+    flex: 1;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
 .TodoItem .content {
     flex: 1;
 }
