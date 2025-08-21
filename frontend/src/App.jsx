@@ -77,12 +77,30 @@ function App() {
       console.log('failed...', error)
     }
   }
+  const onUpdate = async (id, next) => {
+    try {
+      const current = Array.isArray(todos) ? todos.find(t => t._id == id) : null
+      if (!current) throw new Error('해당 ID 없음')
+      const { data } = await axios.put(`${API}/${id}`, next)
+      const updated = data?.updated ?? data?.todo ?? data
+      setTodos(prev => prev.map(t => (t._id === updated._id ? updated : t)))
+    } catch (error) {
+      console.log('업데이트 실패', error)
+    }
+  }
+  const onUpdateTodo = async (id, next) => {
+    try {
+      await onUpdate(id, next)
+    } catch (error) {
+      console.log('업데이트 실패', error)      
+    }
+  }
 
   return (
     <div className='App'>
       <Header />
       <TodoEditor onCreate={onCreate} />
-      <TodoList todos={Array.isArray(todos) ? todos : []} onDelete={onDelete} onUpdateChecked={onUpdateChecked} onUpdateText={onUpdateText} />
+      <TodoList todos={Array.isArray(todos) ? todos : []} onDelete={onDelete} onUpdateChecked={onUpdateChecked} onUpdateTodo={onUpdateTodo} />
     </div>
   )
 }

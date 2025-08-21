@@ -12,7 +12,7 @@ const TodoEditor = ({ onCreate }) => {
   return (
     <form className='TodoEditor' onSubmit={onSubmit}>
       <input type="text" placeholder='new Todo' value={text} onChange={(e) => setText(e.target.value)} />
-      <button type='submit' disabled={!text.trim()}>추가</button>
+      <button type='submit' disabled={!text.trim()}>+</button>
     </form>
   )
 }
