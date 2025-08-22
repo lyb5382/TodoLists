@@ -13,7 +13,7 @@ router.post('/guest', (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: '7d' }
         )
-        res.cookie('auth', token, { httpOnly: true, sameSite: 'lax', secure: false, maxAge: 7 * 24 * 60 * 60 * 100, path: '/' })
+        res.cookie('auth', token, { httpOnly: true, sameSite: 'none', secure: false, maxAge: 7 * 24 * 60 * 60 * 100, path: '/' })
         return res.status(200).json({ message: '게스트 인증 완료', uid })
     } catch (error) {
         console.error('게스트 인증 오류', error)
