@@ -17,6 +17,6 @@ app.use('/api/todos', todoRoutes)
 const authRoutes = require('./routes/authRoutes')
 app.use('/api/auth', authRoutes)
 
-app.get('/', (res, req) => { res.send('hello') })
+app.get('/', (req, res) => { res.send('hello') })
 
 app.listen(PORT, () => { console.log(`server run: http://localhost:${PORT}`) })
