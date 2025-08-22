@@ -4,6 +4,7 @@ import axios from 'axios'
 import Header from './components/Header'
 import TodoEditor from './components/TodoEditor'
 import TodoList from './components/TodoList'
+import { api, ensureGuestAuth } from './lib/api'
 
 function App() {
   const [todos, setTodos] = useState([])
@@ -11,7 +12,8 @@ function App() {
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const res = await axios.get(API)
+        await ensureGuestAuth()
+        const res = await api.get(API)
         const data = Array.isArray(res.data) ? res.data : res.data.todos ?? []
         setTodos(data)
         console.log(data)
@@ -24,7 +26,7 @@ function App() {
   const onCreate = async (todoText) => {
     if (!todoText.trim()) return
     try {
-      const res = await axios.post(API, { text: todoText.trim() })
+      const res = await api.post(API, { text: todoText.trim() })
       const created = res.data?.todo ?? res.data
       if (Array.isArray(res.data?.todos)) {
         setTodos(res.data.todos)
@@ -38,7 +40,7 @@ function App() {
   const onDelete = async (id) => {
     try {
       if (!confirm('삭제?')) return
-      const { data } = await axios.delete(`${API}/${id}`)
+      const { data } = await api.delete(`${API}/${id}`)
       if (Array.isArray(data?.todos)) {
         setTodos(data.todos)
         return
@@ -51,7 +53,7 @@ function App() {
   }
   const onUpdateChecked = async (id, next) => {
     try {
-      const { data } = await axios.patch(`${API}/${id}/check`, { isCompleted: next })
+      const { data } = await api.patch(`${API}/${id}/check`, { isCompleted: next })
       if (Array.isArray(data?.todos)) {
         setTodos(data.todos)
       } else {
@@ -66,7 +68,7 @@ function App() {
     const value = next?.trim()
     if (!value) return
     try {
-      const { data } = await axios.patch(`${API}/${id}/text`, { text: value })
+      const { data } = await api.patch(`${API}/${id}/text`, { text: value })
       if (Array.isArray(data?.todos)) {
         setTodos(data.todos)
       } else {
@@ -81,7 +83,7 @@ function App() {
     try {
       const current = Array.isArray(todos) ? todos.find(t => t._id == id) : null
       if (!current) throw new Error('해당 ID 없음')
-      const { data } = await axios.put(`${API}/${id}`, next)
+      const { data } = await api.put(`${API}/${id}`, next)
       const updated = data?.updated ?? data?.todo ?? data
       setTodos(prev => prev.map(t => (t._id === updated._id ? updated : t)))
     } catch (error) {
@@ -92,7 +94,7 @@ function App() {
     try {
       await onUpdate(id, next)
     } catch (error) {
-      console.log('업데이트 실패', error)      
+      console.log('업데이트 실패', error)
     }
   }
 
